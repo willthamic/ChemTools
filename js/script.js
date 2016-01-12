@@ -1,29 +1,48 @@
+document.onkeydown = checkKey;
+function checkKey(e) {
+	e = e || window.event;											
+	if (e.keyCode == '13') {
+		var input  = $( "#textInput" ).val();
+		input = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+		var out = getA(input);
+		if (out == "-1.00") {
+			out = "Not Found";
+		}
+		output(input, out);
+		$( "#textInput" ).val("");
+	}
+}
+
+function output (left, right) {
+	$("#outputContainer").append("<div class='output'><div class='output-left'><p>" + left + "</p></div><div class='output-right'><p>" + right + "</p></div></div>");
+}
+
 function getA (input) {
 	var wt = -1;
 	input = input.toLowerCase();
-	if(input == "h" || input == "hydrogen") {wt = 1.01;}
-	else if(input == "he" || input == "helium") {wt = 4;}
-	else if(input == "li" || input == "lithium") {wt = 6.94;}
+	if(input == "h" || input == "hydrogen")        {wt = 1.01;}
+	else if(input == "he" || input == "helium")    {wt = 4;}
+	else if(input == "li" || input == "lithium")   {wt = 6.94;}
 	else if(input == "be" || input == "beryllium") {wt = 9.01;}
-	else if(input == "b" || input == "boron") {wt = 10.81;}
-	else if(input == "c" || input == "carbon") {wt = 12.01;}
-	else if(input == "n" || input == "nitrogen") {wt = 14.01;}
-	else if(input == "o" || input == "oxygen") {wt = 16;}
-	else if(input == "f" || input == "fluorine") {wt = 19;}
-	else if(input == "ne" || input == "neon") {wt = 20.18;}
-	else if(input == "na" || input == "sodium") {wt = 22.99;}
+	else if(input == "b"  || input == "boron")     {wt = 10.81;}
+	else if(input == "c"  || input == "carbon")    {wt = 12.01;}
+	else if(input == "n"  || input == "nitrogen")  {wt = 14.01;}
+	else if(input == "o"  || input == "oxygen")    {wt = 16;}
+	else if(input == "f"  || input == "fluorine")  {wt = 19;}
+	else if(input == "ne" || input == "neon")      {wt = 20.18;}
+	else if(input == "na" || input == "sodium")    {wt = 22.99;}
 	else if(input == "mg" || input == "magnesium") {wt = 24.31;}
-	else if(input == "al" || input == "aluminum") {wt = 26.98;}
-	else if(input == "si" || input == "silicon") {wt = 28.09;}
-	else if(input == "p" || input == "phosphorus") {wt = 30.97;}
-	else if(input == "s" || input == "sulfur") {wt = 32.06;}
+	else if(input == "al" || input == "aluminum")  {wt = 26.98;}
+	else if(input == "si" || input == "silicon")   {wt = 28.09;}
+	else if(input == "p"  || input == "phosphorus") {wt = 30.97;}
+	else if(input == "s"  || input == "sulfur") {wt = 32.06;}
 	else if(input == "cl" || input == "chlorine") {wt = 35.45;}
 	else if(input == "ar" || input == "argon") {wt = 39.95;}
-	else if(input == "k" || input == "potassium") {wt = 39.1;}
+	else if(input == "k"  || input == "potassium") {wt = 39.1;}
 	else if(input == "ca" || input == "calcium") {wt = 40.08;}
 	else if(input == "sc" || input == "scandium") {wt = 44.96;}
 	else if(input == "ti" || input == "titanium") {wt = 47.88;}
-	else if(input == "v" || input == "vanadium") {wt = 50.94;}
+	else if(input == "v"  || input == "vanadium") {wt = 50.94;}
 	else if(input == "cr" || input == "chromium") {wt = 52;}
 	else if(input == "mn" || input == "manganese") {wt = 54.94;}
 	else if(input == "fe" || input == "iron") {wt = 55.85;}
@@ -39,7 +58,7 @@ function getA (input) {
 	else if(input == "kr" || input == "krypton") {wt = 83.79;}
 	else if(input == "rb" || input == "rubidium") {wt = 85.47;}
 	else if(input == "sr" || input == "strontium") {wt = 87.62;}
-	else if(input == "y" || input == "yttrium") {wt = 88.91;}
+	else if(input == "y"  || input == "yttrium") {wt = 88.91;}
 	else if(input == "zr" || input == "zirconium") {wt = 91.22;}
 	else if(input == "nb" || input == "niobium") {wt = 92.91;}
 	else if(input == "mo" || input == "molybdenum") {wt = 95.94;}
@@ -53,7 +72,7 @@ function getA (input) {
 	else if(input == "sn" || input == "tin") {wt = 118.7;}
 	else if(input == "sb" || input == "antimony") {wt = 121.8;}
 	else if(input == "te" || input == "tellurium") {wt = 127.6;}
-	else if(input == "i" || input == "iodine") {wt = 126.9;}
+	else if(input == "i"  || input == "iodine") {wt = 126.9;}
 	else if(input == "xe" || input == "xenon") {wt = 131.3;}
 	else if(input == "cs" || input == "cesium") {wt = 132.9;}
 	else if(input == "ba" || input == "barium") {wt = 137.3;}
@@ -74,7 +93,7 @@ function getA (input) {
 	else if(input == "lu" || input == "lutetium") {wt = 175;}
 	else if(input == "hf" || input == "hafnium") {wt = 178.5;}
 	else if(input == "ta" || input == "tantalum") {wt = 180.9;}
-	else if(input == "w" || input == "tungsten") {wt = 183.9;}
+	else if(input == "w"  || input == "tungsten") {wt = 183.9;}
 	else if(input == "re" || input == "rhenium") {wt = 186.2;}
 	else if(input == "os" || input == "osmium") {wt = 190.2;}
 	else if(input == "ir" || input == "iridium") {wt = 192.2;}
@@ -92,7 +111,7 @@ function getA (input) {
 	else if(input == "ac" || input == "actinium") {wt = 227;}
 	else if(input == "th" || input == "thorium") {wt = 232;}
 	else if(input == "pa" || input == "protactinium") {wt = 231;}
-	else if(input == "u" || input == "uranium") {wt = 238;}
+	else if(input == "u"  || input == "uranium") {wt = 238;}
 	else if(input == "np" || input == "neptunium") {wt = 237;}
 	else if(input == "pu" || input == "plutonium") {wt = 242;}
 	else if(input == "am" || input == "americium") {wt = 243;}
@@ -113,11 +132,11 @@ function getA (input) {
 	else if(input == "ds" || input == "darmstadtium") {wt = 281;}
 	else if(input == "rg" || input == "roentgentium") {wt = 280;}
 	else if(input == "cn" || input == "copernicum") {wt = 285;}
-	else if(input == "uut" || input == "ununtrium") {wt = 285;}
+	else if(input == "uut"|| input == "ununtrium") {wt = 285;}
 	else if(input == "fl" || input == "flerovium") {wt = 289;}
-	else if(input == "uup" || input == "ununpentium") {wt = 288;}
+	else if(input == "uup"|| input == "ununpentium") {wt = 288;}
 	else if(input == "lv" || input == "livermorium") {wt = 293;}
-	else if(input == "uus" || input == "ununseptium") {wt = 294;}
-	else if(input == "uuo" || input == "ununoctium") {wt = 294;}
-	return wt;
+	else if(input == "uus"|| input == "ununseptium") {wt = 294;}
+	else if(input == "uuo"|| input == "ununoctium") {wt = 294;}
+	return wt.toFixed(2);
 }

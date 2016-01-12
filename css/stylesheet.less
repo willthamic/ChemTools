@@ -1,0 +1,57 @@
+@bg1: #ff5722;
+@bg2: @bg1 - #222;
+body {
+	background: radial-gradient(circle, @bg1, @bg1, @bg2);
+	width:100%;
+	height:100%;
+}
+
+.mdl-card {
+	width:55%;
+	height:75%;
+}
+
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.mdl-textfield {
+	margin:-20px 0 -20px 0;
+	width:100%;
+}
+
+.output {
+	width:100%;
+	height:50px;
+	border-top:1px solid rgba(0, 0, 0, 0.1);
+	display:flex;
+}
+
+
+.output div {
+	width:50%;
+	height:50px;
+}
+
+.output div p {
+	line-height: 50px;
+	font-size:20px;
+	font-weight:300;
+	font-family:Roboto;
+}
+
+.output-left p {
+	color:rgba(0, 0, 0, 0.5);
+}
+
+.output-right p {
+	text-align:right;
+}
+
+.mdl-card__title {
+	flex-direction: column;
+	justify-content: flex-end;
+}

@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="./js/script.js"></script>
+		<title>Chemistry Tools</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="./css/material.min.css">
+		<link rel="stylesheet/less" href="./css/stylesheet.less">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/script.js"></script>
+		<script src="./js/less.min.js"></script>
 		<script src="./js/material.min.js"></script>
-		<!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
 	</head>
 	<body>
-		
+		<div class="mdl-card mdl-shadow--8dp centered">
+			 <div id="outputContainer" class="mdl-card__title mdl-card--expand">
+				 <!--Output Goes Here-->
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<div class="mdl-textfield mdl-js-textfield is-focused">
+					<input id="textInput" class="mdl-textfield__input" type="text" id="input" autofocus>
+					<label class="mdl-textfield__label" for="input">Calculate...</label>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
