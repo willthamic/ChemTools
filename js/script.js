@@ -26,7 +26,7 @@ function setColor (color) {
 
 function loadColor() {
 	var  color = "deep-orange";
-	if (localStorage.length == 0) {
+	if (localStorage.getItem('color') == "null") {
 		localStorage.setItem('color', color);
 	}
 	color = localStorage.getItem('color');
