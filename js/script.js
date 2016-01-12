@@ -4,11 +4,16 @@ function checkKey(e) {
 	if (e.keyCode == '13') {
 		var input  = $( "#textInput" ).val();
 		input = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
-		var out = getA(input);
-		if (out == "-1.00") {
-			out = "Not Found";
+		if (input == "Clear") {
+			$("#outputContainer").empty();
+		} else if (input == ""){
+		} else {
+			var out = getA(input);
+			if (out == "-1.00") {
+				out = "Not Found";
+			}
+			output(input, out);
 		}
-		output(input, out);
 		$( "#textInput" ).val("");
 	}
 }
