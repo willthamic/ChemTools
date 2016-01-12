@@ -12,7 +12,49 @@
 		<script src="./js/less.min.js"></script>
 		<script src="./js/material.min.js"></script>
 	</head>
-	<body>
+	<body id="body" class="blue-grey">
+		<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+		<header class="mdl-layout__header mdl-layout__header--transparent">
+			<div class="mdl-layout__header-row">
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation -->
+		<button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+			<i class="material-icons">more_vert</i>
+		</button>
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('red')">           <i class="material-icons" style="color:#f44336;">brightness_1</i></a>
+				<a href="javascript:setColor('pink')">          <i class="material-icons" style="color:#e91e63;">brightness_1</i></a>
+				<a href="javascript:setColor('purple')">        <i class="material-icons" style="color:#9c27b0;">brightness_1</i></a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('deep-purple')">   <i class="material-icons" style="color:#673ab7;">brightness_1</i></a>
+				<a href="javascript:setColor('indigo')">        <i class="material-icons" style="color:#3f51b5;">brightness_1</i></a>
+				<a href="javascript:setColor('blue')">          <i class="material-icons" style="color:#2196f3;">brightness_1</i></a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('light-blue')">    <i class="material-icons" style="color:#03a9f4;">brightness_1</i></a>
+				<a href="javascript:setColor('cyan')">          <i class="material-icons" style="color:#00bcd4;">brightness_1</i></a>
+				<a href="javascript:setColor('teal')">          <i class="material-icons" style="color:#009688;">brightness_1</i></a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('green')">         <i class="material-icons" style="color:#4caf50;">brightness_1</i></a>
+				<a href="javascript:setColor('light-green')">   <i class="material-icons" style="color:#8bc34a;">brightness_1</i></a>
+				<a href="javascript:setColor('lime')">          <i class="material-icons" style="color:#cddc39;">brightness_1</i></a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('yellow')">        <i class="material-icons" style="color:#ffeb3b;">brightness_1</i></a>
+				<a href="javascript:setColor('amber')">         <i class="material-icons" style="color:#ffc107;">brightness_1</i></a>
+				<a href="javascript:setColor('orange')">        <i class="material-icons" style="color:#ff9800;">brightness_1</i></a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="javascript:setColor('deep-orange')">   <i class="material-icons" style="color:#ff5722;">brightness_1</i></a>
+				<a href="javascript:setColor('brown')">         <i class="material-icons" style="color:#795548;">brightness_1</i></a>
+				<a href="javascript:setColor('blue-grey')">     <i class="material-icons" style="color:#607d8b;">brightness_1</i></a>
+			</li>
+		</ul>
+			</div>
+		</header>
 		<div class="mdl-card mdl-shadow--8dp centered">
 			 <div id="outputContainer" class="mdl-card__title mdl-card--expand">
 				 <!--Output Goes Here-->
@@ -24,5 +66,6 @@
 				</div>
 			</div>
 		</div>
+		<script>loadColor();</script>
 	</body>
 </html>
