@@ -46,11 +46,11 @@ function parseInput (input) {
 	var out = getAofE(input);
 	if (out == -1) {
 		var splitted = split(input);
-		console.log("splitted: " + splitted);
+		console.log("Splitted: " + splitted);
 		var multiplier = getMulti(splitted);
-		console.log("muulti: " + multiplier);
+		console.log("Multi: " + multiplier);
 		var stitched = stitch(splitted);
-		console.log("stitched: " + stitched);
+		console.log("Stitched: " + stitched);
 		for (var i = 0; i < stitched.length; i++) {
 			if (getStringType(stitched[i]) == "letter") {
 				stitched[i] = getAofE(stitched[i]);
