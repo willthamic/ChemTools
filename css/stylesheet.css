@@ -1,0 +1,100 @@
+.red         {background: radial-gradient(circle, #f44336, #f44336, #d22114);}
+.pink        {background: radial-gradient(circle, #e91e63, #e91e63, #c70041);}
+.purple      {background: radial-gradient(circle, #9c27b0, #9c27b0, #7a058e);}
+.deep-purple {background: radial-gradient(circle, #673ab7, #673ab7, #451895);}
+.indigo      {background: radial-gradient(circle, #3f51b5, #3f51b5, #1d2f93);}
+.blue        {background: radial-gradient(circle, #2196f3, #2196f3, #0074d1);}
+.light-blue  {background: radial-gradient(circle, #03a9f4, #03a9f4, #0087d2);}
+.cyan        {background: radial-gradient(circle, #00bcd4, #00bcd4, #009ab2);}
+.teal        {background: radial-gradient(circle, #009688, #009688, #007466);}
+.green       {background: radial-gradient(circle, #4caf50, #4caf50, #2a8d2e);}
+.light-green {background: radial-gradient(circle, #8bc34a, #8bc34a, #69a128);}
+.lime        {background: radial-gradient(circle, #cddc39, #cddc39, #abba17);}
+.yellow      {background: radial-gradient(circle, #ffeb3b, #ffeb3b, #ddc919);}
+.amber       {background: radial-gradient(circle, #ffc107, #ffc107, #dd9f00);}
+.orange      {background: radial-gradient(circle, #ff9800, #ff9800, #dd7600);}
+.deep-orange {background: radial-gradient(circle, #ff5722, #ff5722, #dd3500);}
+.brown       {background: radial-gradient(circle, #795548, #795548, #573326);}
+.blue-grey   {background: radial-gradient(circle, #607d8b, #607d8b, #3e5b69);}
+
+body {
+	width:100%;
+	height:100%;
+	transition: all 1s;
+}
+
+.mdl-card {
+	width:55%;
+	height:75%;
+}
+
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.mdl-textfield {
+	margin:-20px 0 -20px 0;
+	width:100%;
+}
+
+.output {
+	width:100%;
+	height:50px;
+	border-top:1px solid rgba(0, 0, 0, 0.1);
+	display:flex;
+	overflow:hidden;
+}
+
+
+.output div {
+	width:50%;
+	height:50px;
+}
+
+.output div p {
+	line-height: 50px;
+	font-size:20px;
+	font-weight:300;
+	font-family:Roboto;
+}
+
+.output-left p {
+	color:rgba(0, 0, 0, 0.5);
+}
+
+.output-left p:first-child {
+	display:block;
+}
+.output-left p:last-child {
+	display:none;
+}
+.output-left:hover p:first-child {
+	display:none;
+}
+.output-left:hover p:last-child {
+	display:block;
+}
+
+.output-right p {
+	text-align:right;
+}
+
+.mdl-card__title {
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.color-circle {
+	height:16px;
+	width:16px;
+	border-radius:100%;
+	display:inline-block;
+	background-color:red;
+}
+
+.mdl-menu__item .material-icons {
+	font-size:48px !important;
+}
