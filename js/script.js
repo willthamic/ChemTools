@@ -1,4 +1,4 @@
-
+// Detect enter keypress
 document.onkeydown = checkKey;
 function checkKey(e) {
 	e = e || window.event;
@@ -8,66 +8,47 @@ function checkKey(e) {
 	}
 }
 
-function getCharType (character) {
-	var type = "null";
-	if (typeof character == "string") {
-		if (character != character.toUpperCase()) {
-			type = "lower";
-		} else if (character != character.toLowerCase()) {
-			type = "upper";
-		}
-	}
-	if (!isNaN(character)) {
-		type = "number";
-	} else if (character == "(") {
-		type = "(";
-	} else if (character == ")") {
-		type = ")";
-	}
-	return type;
-}
-
-function getStringType (string) {
-	var type = "null";
-	if (string.match(/[a-z]/i)) {
-		type = "letter";
-	} else if (!isNaN(string)) {
-		type = "number";
-	} else if (string == "(") {
-		type = "(";
-	} else if (string == ")") {
-		type = ")";
-	}
-	return type;
-}
-
-// Analyses the input
+// Processes the input
 function parseInput (input) {
-	var out = getAofE(input);
-	if (out == -1) {
-		var splitted = split(input);
-		console.log("Splitted: " + splitted);
-		var multiplier = getMulti(splitted);
-		console.log("Multi: " + multiplier);
-		var stitched = stitch(splitted);
-		console.log("Stitched: " + stitched);
-		for (var i = 0; i < stitched.length; i++) {
-			if (getStringType(stitched[i]) == "letter") {
-				stitched[i] = getAofE(stitched[i]);
-			}
+	var filtered = filter(input);
+	console.log("Filtered: " + filtered);
+	var splitted = split(filtered);
+	console.log("Splitted: " + splitted);
+	var multiplier = getMulti(splitted);
+	console.log("Multiplier: " + multiplier);
+	var stitched = stitch(splitted);
+	console.log("Stitched: " + stitched);
+	var outArray = stitched.slice(0);
+	for (var i = 0; i < outArray.length; i++) {
+		if (getStringType(outArray[i]) == "letter") {
+			outArray[i] = getAofEShaner(outArray[i]);
 		}
-		out = multiplier * eval(stitched.join(""));
 	}
-	output(input, out.toFixed(2));
+	var formatted = stitched.join("");
+	if (multiplier != 1) {
+		formatted = multiplier + "*[" + formatted + "]"
+	}
+	var out = multiplier * eval(outArray.join(""));
+	output(input, formatted, out.toFixed(2));
 }
 
-// Gets multiplier of sequence
-function getMulti (array) {
-	if (getCharType(array[0]) == "number") {
-		return Number(array[0]);
-	} else {
-		return 1;
+// Removes spaces and other characters that cause problems with the processing
+// Changes brackets and braces to parenthesis
+function filter (string) {
+	var array = string.split("");
+	for(var i = array.length - 1; i >= 0; i--) {
+		if(array[i] == " " || array[i] == "." || array[i] == "·") {
+			array.splice(i, 1);
+		} else if (array[i] == "[" || array[i] == "{") {
+			array[i] = "(";
+		} else if (array[i] == "]" || array[i] == "}") {
+			array[i] = ")";
+		} else if (getCharType(array[i]) == "null") {
+			array.splice(i, 1);
+		}
 	}
+	string = array.join("");
+	return string;
 }
 
 // Splits the input into readable parts
@@ -85,19 +66,16 @@ function split (input) {
 	return pieces;
 }
 
-/*
-letter + letter	= +
-letter + number	= *
-letter + (		= +
-number + letter	= +
-number + (		= +
-) 	   + letter = +
-)      + number	= *
-)      + (		= +
+// Gets multiplier of array
+function getMulti (array) {
+	if (getCharType(array[0]) == "number") {
+		return Number(array[0]);
+	} else {
+		return 1;
+	}
+}
 
-*/
-
-// Stitches the array together
+// Stitches the array pieces together with mathematical operators
 function stitch (array) {
 	if (getCharType(array[0]) == "number") {
 		array.splice(0, 1);
@@ -125,47 +103,93 @@ function stitch (array) {
 	return array;
 }
 
-function arrayWeight (array) {
-	var out = 0;
-	for (var i = 0; i < array.length; i++) {
-		out += getAofE(array[i]);
+// Returns lower, upper, number, (, ) or null  depending on character
+function getCharType (character) {
+	var type = "null";
+	if (typeof character == "string") {
+		if (character != character.toUpperCase()) {
+			type = "lower";
+		} else if (character != character.toLowerCase()) {
+			type = "upper";
+		}
 	}
-	return out;
+	if (!isNaN(character)) {
+		type = "number";
+	} else if (character == "(") {
+		type = "(";
+	} else if (character == ")") {
+		type = ")";
+	}
+	return type;
+}
+
+// Returns letter, number, (, ) or null depending of string
+function getStringType (string) {
+	var type = "null";
+	if (string.match(/[a-z]/i)) {
+		type = "letter";
+	} else if (!isNaN(string)) {
+		type = "number";
+	} else if (string == "(") {
+		type = "(";
+	} else if (string == ")") {
+		type = ")";
+	}
+	return type;
 }
 
 // Outputs formatted div to main container based on input
-function output (left, right) {
-	$("#outputContainer").append("<div class='output'><div class='output-left'><p>" + left + "</p></div><div class='output-right'><p>" + right + "</p></div></div>");
+function output (leftRaw, leftFormatted, right) {
+	$("#outputContainer").append("<div class='output'><div class='output-left'><p>" + leftRaw + "</p><p>" + leftFormatted + "</p></div><div class='output-right'><p>" + right + "</p></div></div>");
+}
+
+//Sets page color based on input "color"
+function setColor (color) {
+	localStorage.setItem('color', color)			// Sets localStorage item color to input
+	$("body").removeClass().addClass(color, 1000);	// Replaces all classes from body with input color
+}
+
+//Checks for color and sets it to it
+function loadColor() {
+	var  color = "grey-blue"; //Default load color is grey-blue
+	if (localStorage.getItem('color') == "null" || localStorage.getItem('color') == null) {
+		localStorage.setItem('color', color);
+	}
+	color = localStorage.getItem('color');
+	setColor(color);
+}
+
+function getAofEAccurate (element) {
 }
 
 // Takes element name or symbol as input and returns atomic weight as string to two decimals
-function getAofE (element) {
+function getAofEShaner (element) {
 	var wt = -1;
 	element = element.toLowerCase();
 	if      (element == "h"  || element == "hydrogen")  {wt = 1.01;}
-	else if (element == "he" || element == "helium")    {wt = 4;}
+	else if (element == "he" || element == "helium")    {wt = 4.00;}
 	else if (element == "li" || element == "lithium")   {wt = 6.94;}
 	else if (element == "be" || element == "beryllium") {wt = 9.01;}
 	else if (element == "b"  || element == "boron")     {wt = 10.81;}
 	else if (element == "c"  || element == "carbon")    {wt = 12.01;}
 	else if (element == "n"  || element == "nitrogen")  {wt = 14.01;}
-	else if (element == "o"  || element == "oxygen")    {wt = 16;}
-	else if (element == "f"  || element == "fluorine")  {wt = 19;}
+	else if (element == "o"  || element == "oxygen")    {wt = 16.00;}
+	else if (element == "f"  || element == "fluorine")  {wt = 19.00;}
 	else if (element == "ne" || element == "neon")      {wt = 20.18;}
 	else if (element == "na" || element == "sodium")    {wt = 22.99;}
 	else if (element == "mg" || element == "magnesium") {wt = 24.31;}
 	else if (element == "al" || element == "aluminum")  {wt = 26.98;}
 	else if (element == "si" || element == "silicon")   {wt = 28.09;}
-	else if (element == "p"  || element == "phosphorus") {wt = 30.97;}
-	else if (element == "s"  || element == "sulfur") {wt = 32.06;}
-	else if (element == "cl" || element == "chlorine") {wt = 35.45;}
-	else if (element == "ar" || element == "argon") {wt = 39.95;}
-	else if (element == "k"  || element == "potassium") {wt = 39.1;}
-	else if (element == "ca" || element == "calcium") {wt = 40.08;}
-	else if (element == "sc" || element == "scandium") {wt = 44.96;}
-	else if (element == "ti" || element == "titanium") {wt = 47.88;}
-	else if (element == "v"  || element == "vanadium") {wt = 50.94;}
-	else if (element == "cr" || element == "chromium") {wt = 52;}
+	else if (element == "p"  || element == "phosphorus"){wt = 30.97;}
+	else if (element == "s"  || element == "sulfur")    {wt = 32.06;}
+	else if (element == "cl" || element == "chlorine")  {wt = 35.45;}
+	else if (element == "ar" || element == "argon")     {wt = 39.95;}
+	else if (element == "k"  || element == "potassium") {wt = 39.10;}
+	else if (element == "ca" || element == "calcium")   {wt = 40.08;}
+	else if (element == "sc" || element == "scandium")  {wt = 44.96;}
+	else if (element == "ti" || element == "titanium")  {wt = 47.88;}
+	else if (element == "v"  || element == "vanadium")  {wt = 50.94;}
+	else if (element == "cr" || element == "chromium")  {wt = 52.00;}
 	else if (element == "mn" || element == "manganese") {wt = 54.94;}
 	else if (element == "fe" || element == "iron") {wt = 55.85;}
 	else if (element == "co" || element == "cobalt") {wt = 58.93;}
@@ -261,20 +285,4 @@ function getAofE (element) {
 	else if (element == "uus"|| element == "ununseptium") {wt = 294;}
 	else if (element == "uuo"|| element == "ununoctium") {wt = 294;}
 	return wt;
-}
-
-//Sets page color based on input "color"
-function setColor (color) {
-	localStorage.setItem('color', color)			// Sets localStorage item color to input
-	$("body").removeClass().addClass(color, 1000);	// Replaces all classes from body with input color
-}
-
-//Checks for color and sets it to it
-function loadColor() {
-	var  color = "grey-blue"; //Default load color is grey-blue
-	if (localStorage.getItem('color') == "null" || localStorage.getItem('color') == null) {
-		localStorage.setItem('color', color);
-	}
-	color = localStorage.getItem('color');
-	setColor(color);
 }
