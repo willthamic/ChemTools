@@ -11,10 +11,8 @@ function checkKey(e) {
 	}
 }
 
+// Figure out what the input means
 function parseInput (input) {
-	if (set != "") {
-		input = set + " " + input;
-	}
 	console.log("Input: " + input);
 	var inputArray = input.split(" ");
 	console.log("Input Array: " + inputArray);
@@ -24,10 +22,8 @@ function parseInput (input) {
 	} else if (input.toLowerCase() == "use list accurate") {
 		elementlist = "accurate";
 		output("List set to Accurate", "" , "");
-	} else if (input.indexOf("aw") != -1) {
-		getA(inputArray.slice(1));
-	} else if (inputArray[0] == "set") {
-		set = inputArray.slice(1).join(" ");
+	} else {
+		getA(inputArray);
 	}
 }
 
